@@ -597,6 +597,8 @@ ul {
     border: 1px solid var(--border-color);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -645,6 +647,7 @@ ul {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    margin-top: auto;
 }
 
 .read-more i {
