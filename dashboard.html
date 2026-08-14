@@ -93,6 +93,8 @@
                         data-target="settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
                 <li data-roles="Fleet Commander,Teleops Engineer,Admin"><a href="#" class="sidebar-link"
                         data-target="support"><i class="fa-solid fa-headset"></i> Support</a></li>
+                <li data-roles="Fleet Commander,Teleops Engineer,Admin"><a href="#" class="sidebar-link"
+                        onclick="logout()" style="color: #ef4444; font-weight: 600;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
             </ul>
 
             <div
@@ -100,7 +102,7 @@
                 <img src="https://ui-avatars.com/api/?name=User&background=0ea5e9&color=fff&rounded=true"
                     id="userAvatar" alt="User"
                     style="width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <div>
+                <div style="flex: 1;">
                     <h4 id="sidebarUserName" style="margin: 0; font-size: 0.95rem; color: var(--text-heading);">Admin
                         User</h4>
                     <span style="font-size: 0.8rem; color: var(--text-light);">Online</span>
