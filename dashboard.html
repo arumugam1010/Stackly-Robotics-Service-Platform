@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Stackly</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar-area sticky"
+        style="position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); background: var(--bg-primary);">
+        <div class="container nav-container" style="height: 90px; justify-content: flex-start; position: relative;">
+            <div class="logo"
+                style="display: flex; align-items: center; border-right: 1px solid var(--border-color); padding-right: 25px; margin-right: 25px;">
+                <a href="#" style="cursor: pointer;" onclick="goToFirstVisibleTab(event)">
+                    <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img">
+                </a>
+            </div>
+
+            <h2 id="navDashboardTitle"
+                style="margin: 0; font-size: 1.6rem; font-weight: 700; color: var(--text-heading); background: linear-gradient(135deg, var(--color-primary) 0%, #6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Dashboard Portal</h2>
+
+            <nav id="navMenu" style="margin-left: auto; display: flex; gap: 15px; align-items: center;">
+                <div class="nav-auth-buttons" style="display: flex; gap: 15px; align-items: center;">
+                    <button class="btn btn-outline" id="navLogoutBtn"
+                        style="padding: 10px 20px; border: 2px solid #ef4444; color: #ef4444; border-radius: 8px; font-weight: 600; background: transparent; cursor: pointer;"
+                        onclick="logout()">Logout</button>
+                </div>
+                <button id="sidebarToggle" class="mobile-sidebar-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <ul class="sidebar-menu">
+                <!-- Shared -->
+                <li data-roles="Fleet Commander,Teleops Engineer,Admin"><a href="#" class="sidebar-link active"
+                        data-target="overview"><i class="fa-solid fa-house"></i> Overview</a></li>
+
+                <!-- Fleet Commander Unique (4) -->
+                <li data-roles="Fleet Commander,Admin"><a href="#" class="sidebar-link" data-target="fleet"><i
+                            class="fa-solid fa-robot"></i> Fleet Management</a></li>
+                <li data-roles="Fleet Commander,Admin"><a href="#" class="sidebar-link" data-target="analytics"><i
+                            class="fa-solid fa-chart-pie"></i> Analytics</a></li>
+                <li data-roles="Fleet Commander,Admin"><a href="#" class="sidebar-link" data-target="security"><i
+                            class="fa-solid fa-shield-halved"></i> Security Logs</a></li>
+                <li data-roles="Fleet Commander,Admin"><a href="#" class="sidebar-link" data-target="mission"><i
+                            class="fa-solid fa-route"></i> Mission Planning</a></li>
+
+                <!-- Teleops Engineer Unique (4) -->
+                <li data-roles="Teleops Engineer,Admin"><a href="#" class="sidebar-link" data-target="globalmap"><i
+                            class="fa-solid fa-earth-americas"></i> Global Map</a></li>
+                <li data-roles="Teleops Engineer,Admin"><a href="#" class="sidebar-link" data-target="override"><i
+                            class="fa-solid fa-gamepad"></i> Remote Override</a></li>
+                <li data-roles="Teleops Engineer,Admin"><a href="#" class="sidebar-link" data-target="telemetry"><i
+                            class="fa-solid fa-satellite-dish"></i> Hardware Telemetry</a></li>
+                <li data-roles="Teleops Engineer,Admin"><a href="#" class="sidebar-link" data-target="incidents"><i
+                            class="fa-solid fa-triangle-exclamation"></i> Incident Reports</a></li>
+
+                <!-- Hardware Technician Unique (4) -->
+                <li data-roles="Admin"><a href="#" class="sidebar-link" data-target="maintenance"><i
+                            class="fa-solid fa-wrench"></i> Maintenance Bay</a></li>
+                <li data-roles="Admin"><a href="#" class="sidebar-link" data-target="diagnostics"><i
+                            class="fa-solid fa-stethoscope"></i> Diagnostics</a></li>
+                <li data-roles="Admin"><a href="#" class="sidebar-link" data-target="inventory"><i
+                            class="fa-solid fa-box-open"></i> Parts Inventory</a></li>
+                <li data-roles="Admin"><a href="#" class="sidebar-link" data-target="repairlogs"><i
+                            class="fa-solid fa-clipboard-list"></i> Repair Logs</a></li>
+
+                <!-- Shared -->
+                <li data-roles="Fleet Commander,Teleops Engineer,Admin"><a href="#" class="sidebar-link"
+                        data-target="settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li data-roles="Fleet Commander,Teleops Engineer,Admin"><a href="#" class="sidebar-link"
+                        data-target="support"><i class="fa-solid fa-headset"></i> Support</a></li>
+            </ul>
+
+            <div
+                style="margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; gap: 15px;">
+                <img src="https://ui-avatars.com/api/?name=User&background=0ea5e9&color=fff&rounded=true"
+                    id="userAvatar" alt="User"
+                    style="width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <div>
+                    <h4 id="sidebarUserName" style="margin: 0; font-size: 0.95rem; color: var(--text-heading);">Admin
+                        User</h4>
+                    <span style="font-size: 0.8rem; color: var(--text-light);">Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 5px;">
+
+                        <h2 style="margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--text-heading);">Welcome
+                            back, <span id="userEmail" style="color: var(--color-primary);">User</span></h2>
+                    </div>
+                </div>
+                <div>
+                    <a href="404.html" class="btn btn-primary"><i class="fa-solid fa-download"></i> Export Report</a>
+                </div>
+            </div>
+
+            <!-- Tab: Overview -->
+            <div id="overview" class="tab-content active">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon"
+                            style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);">
+                            <i class="fa-solid fa-truck-fast"></i></div>
+                        <div class="metric-data">
+                            <h3>124</h3>
+                            <p>Active Robots</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"
+                            style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);">
+                            <i class="fa-solid fa-check-circle"></i></div>
+                        <div class="metric-data">
+                            <h3>99.9%</h3>
+                            <p>Fleet Uptime</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"
+                            style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);">
+                            <i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="metric-data">
+                            <h3>3</h3>
+                            <p>Pending Alerts</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"
+                            style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);">
+                            <i class="fa-solid fa-bolt"></i></div>
+                        <div class="metric-data">
+                            <h3>420 kWh</h3>
+                            <p>Energy Consumed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 25px;">
+                    <div class="content-panel">
+                        <h3>Recent Activity Log</h3>
+                        <p style="margin-bottom: 20px; color: var(--text-light);">Live operational feed across all
+                            active zones.</p>
+                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th style="padding: 15px 10px;">Timestamp</th>
+                                <th style="padding: 15px 10px;">Unit ID</th>
+                                <th style="padding: 15px 10px;">Event</th>
+                                <th style="padding: 15px 10px;">Status</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">Just now</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-09</td>
+                                <td style="padding: 15px 10px;">Completed Waypoint A</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;"><i
+                                            class="fa-solid fa-circle"
+                                            style="font-size:0.6rem; margin-right:5px;"></i>Success</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">2 mins ago</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X2</td>
+                                <td style="padding: 15px 10px;">Maintenance Required</td>
+                                <td style="padding: 15px 10px;"><span style="color: #f59e0b; font-weight: 600;"><i
+                                            class="fa-solid fa-circle"
+                                            style="font-size:0.6rem; margin-right:5px;"></i>Warning</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">14 mins ago</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Drone-Z1</td>
+                                <td style="padding: 15px 10px;">Returned to Base</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;"><i
+                                            class="fa-solid fa-circle"
+                                            style="font-size:0.6rem; margin-right:5px;"></i>Success</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">22 mins ago</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Agv-Load-4</td>
+                                <td style="padding: 15px 10px;">Path Blocked</td>
+                                <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;"><i
+                                            class="fa-solid fa-circle"
+                                            style="font-size:0.6rem; margin-right:5px;"></i>Error</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px 10px; color: var(--text-light);">45 mins ago</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">AMR-Beta-12</td>
+                                <td style="padding: 15px 10px;">Started Shift</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;"><i
+                                            class="fa-solid fa-circle"
+                                            style="font-size:0.6rem; margin-right:5px;"></i>Success</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 25px;">
+                        <div class="content-panel" style="flex: 1;">
+                            <h3>System Health</h3>
+                            <div style="margin-top: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span style="font-weight: 600;">Central Server</span>
+                                    <span style="color: #10b981;">Operational</span>
+                                </div>
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px; margin-bottom: 20px;">
+                                    <div style="width: 100%; background: #10b981; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span style="font-weight: 600;">Database API</span>
+                                    <span style="color: #10b981;">Operational</span>
+                                </div>
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px; margin-bottom: 20px;">
+                                    <div style="width: 100%; background: #10b981; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span style="font-weight: 600;">IoT Gateway</span>
+                                    <span style="color: #f59e0b;">Degraded</span>
+                                </div>
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 60%; background: #f59e0b; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-panel">
+                            <h3>Quick Actions</h3>
+                            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                                <a href="404.html" class="btn btn-primary"
+                                    style="flex: 1; text-align: center; font-size: 0.9rem; padding: 10px;">Halt All</a>
+                                <a href="404.html" class="btn btn-outline"
+                                    style="flex: 1; text-align: center; font-size: 0.9rem; padding: 10px;">Run Audit</a>
+                                <a href="404.html" class="btn btn-outline"
+                                    style="flex: 1; text-align: center; font-size: 0.9rem; padding: 10px;">New Unit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Fleet Management -->
+            <div id="fleet" class="tab-content">
+                <div class="content-panel"
+                    style="margin-bottom: 25px; padding: 0; overflow: hidden; position: relative;">
+                    <div
+                        style="height: 350px; background: url('https://www.google.com/maps/vt/pb=!1m4!1m3!1i15!2i16223!3i18567!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0') center/cover; position: relative;">
+                        <!-- Map Overlay -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                            <i class="fa-solid fa-map-location-dot"
+                                style="font-size: 4rem; color: white; margin-bottom: 20px;"></i>
+                            <h3 style="color: white; margin-bottom: 15px;">Live 3D Map Interface</h3>
+                            <a href="404.html" class="btn btn-primary">Enter Fullscreen Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Fleet Roster</h3>
+                        <a href="404.html" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem;"><i
+                                class="fa-solid fa-filter"></i> Filter Active</a>
+                    </div>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Unit Name</th>
+                            <th style="padding: 15px 10px;">Model</th>
+                            <th style="padding: 15px 10px;">Battery</th>
+                            <th style="padding: 15px 10px;">Current Task</th>
+                            <th style="padding: 15px 10px;">Status</th>
+                            <th style="padding: 15px 10px;">Action</th>
+                        </tr>
+                        <!-- 8 Rows -->
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-01</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Stackly Transport V2</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-full"
+                                    style="color: #10b981;"></i> 98%</td>
+                            <td style="padding: 15px 10px;">Zone A Patrol</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Active</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-02</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Stackly Transport V2</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-half"
+                                    style="color: #f59e0b;"></i> 45%</td>
+                            <td style="padding: 15px 10px;">Pallet Move #402</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Active</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X1</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Kuka KR C4</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-plug" style="color: #6366f1;"></i>
+                                Grid</td>
+                            <td style="padding: 15px 10px;">Assembly Line B</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Active</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X2</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Kuka KR C4</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-plug" style="color: #6366f1;"></i>
+                                Grid</td>
+                            <td style="padding: 15px 10px;">Diagnostics</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Maintenance</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Drone-Z1</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">DJI Matrice 300</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-quarter"
+                                    style="color: #ef4444;"></i> 12%</td>
+                            <td style="padding: 15px 10px;">Charging</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(99, 102, 241, 0.1); color: #6366f1; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Docked</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Drone-Z2</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">DJI Matrice 300</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-full"
+                                    style="color: #10b981;"></i> 100%</td>
+                            <td style="padding: 15px 10px;">Roof Inspection</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Active</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Spot-Dog-1</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Boston Dynamics Spot</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-half"
+                                    style="color: #f59e0b;"></i> 68%</td>
+                            <td style="padding: 15px 10px;">Perimeter Sec</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Active</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; font-weight: 600;">Agv-Load-4</td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Fetch Robotics Core</td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-battery-empty"
+                                    style="color: #ef4444;"></i> 2%</td>
+                            <td style="padding: 15px 10px;">Offline</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Error</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><a href="404.html" style="color: var(--color-primary);"><i
+                                        class="fa-solid fa-crosshairs"></i> Track</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Analytics -->
+            <div id="analytics" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Total Distance Traveled</span>
+                        <h3 style="font-size: 2rem;">12,450 km</h3>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i
+                                class="fa-solid fa-arrow-trend-up"></i> +12% this week</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Tasks Completed</span>
+                        <h3 style="font-size: 2rem;">842,910</h3>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i
+                                class="fa-solid fa-arrow-trend-up"></i> +5% this week</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Anomaly Detection Rate</span>
+                        <h3 style="font-size: 2rem;">0.04%</h3>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i
+                                class="fa-solid fa-arrow-trend-down"></i> -1% this week</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Average Cycle Time</span>
+                        <h3 style="font-size: 2rem;">4.2m</h3>
+                        <span style="color: #ef4444; font-weight: 600; font-size: 0.85rem;"><i
+                                class="fa-solid fa-arrow-trend-up"></i> +0.5m this week</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+                    <div class="content-panel">
+                        <h3>Performance Over Time</h3>
+                        <div
+                            style="height: 250px; background: rgba(0,0,0,0.02); border-radius: 12px; margin-top: 20px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color);">
+                            <p style="color: var(--text-light);"><i class="fa-solid fa-chart-line"></i> Chart
+                                Visualization API Loading...</p>
+                        </div>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Error Rates by Model</h3>
+                        <div
+                            style="height: 250px; background: rgba(0,0,0,0.02); border-radius: 12px; margin-top: 20px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color);">
+                            <p style="color: var(--text-light);"><i class="fa-solid fa-chart-pie"></i> Chart
+                                Visualization API Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <h3>Generate Custom Report</h3>
+                        <form style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                            <input type="date"
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <select style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                <option>All Models</option>
+                                <option>AMR Transport</option>
+                                <option>Drones</option>
+                            </select>
+                            <a href="404.html" class="btn btn-primary" style="text-align: center;">Generate PDF</a>
+                        </form>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Export History</h3>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                <span>Q2 Operations Summary</span> <a href="404.html"><i
+                                        class="fa-solid fa-download"></i></a></li>
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                <span>June Safety Audit</span> <a href="404.html"><i
+                                        class="fa-solid fa-download"></i></a></li>
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                <span>Battery Degradation Log</span> <a href="404.html"><i
+                                        class="fa-solid fa-download"></i></a></li>
+                            <li style="padding: 10px 0; display: flex; justify-content: space-between;"><span>May
+                                    Network Latency</span> <a href="404.html"><i class="fa-solid fa-download"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Security Logs -->
+            <div id="security" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card"
+                        style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; border: none;">
+                        <div class="metric-icon"
+                            style="background: rgba(255,255,255,0.1); color: #10b981; box-shadow: none;"><i
+                                class="fa-solid fa-shield-halved"></i></div>
+                        <div class="metric-data">
+                            <h3 style="color: white;">System Secure</h3>
+                            <p style="color: #94a3b8;">Threat Level: Low (0 Active Threats)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-panel">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Zero-Trust Audit Log</h3>
+                        <a href="404.html" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem;">Export
+                            CSV</a>
+                    </div>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Timestamp</th>
+                            <th style="padding: 15px 10px;">User/IP</th>
+                            <th style="padding: 15px 10px;">Event Action</th>
+                            <th style="padding: 15px 10px;">Severity</th>
+                        </tr>
+                        <!-- 8 Rows -->
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-14 14:30:12</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">sys_admin@stackly</td>
+                            <td style="padding: 15px 10px;">Successful Login (2FA Passed)</td>
+                            <td style="padding: 15px 10px;"><span style="color: #10b981;">Info</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-14 14:15:00</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">System</td>
+                            <td style="padding: 15px 10px;">OTA Payload Signature Verified</td>
+                            <td style="padding: 15px 10px;"><span style="color: #10b981;">Info</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-14 11:20:45</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">192.168.1.104</td>
+                            <td style="padding: 15px 10px;">Failed Login Attempt (Bad Password)</td>
+                            <td style="padding: 15px 10px;"><span style="color: #f59e0b;">Warning</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-14 11:18:12</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">192.168.1.104</td>
+                            <td style="padding: 15px 10px;">Failed Login Attempt (Bad Password)</td>
+                            <td style="padding: 15px 10px;"><span style="color: #f59e0b;">Warning</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-13 23:40:01</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">Firewall</td>
+                            <td style="padding: 15px 10px;">Blocked Port Scan from 45.33.2.1</td>
+                            <td style="padding: 15px 10px;"><span style="color: #ef4444;">Critical</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-13 18:00:00</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">System</td>
+                            <td style="padding: 15px 10px;">Daily Database Backup Completed</td>
+                            <td style="padding: 15px 10px;"><span style="color: #10b981;">Info</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-13 14:12:33</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">operator@stackly</td>
+                            <td style="padding: 15px 10px;">Initiated Manual Override AMR-Alpha-01</td>
+                            <td style="padding: 15px 10px;"><span style="color: #f59e0b;">Warning</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; color: var(--text-light);">2026-08-13 09:00:00</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">System</td>
+                            <td style="padding: 15px 10px;">SSL Certificate Auto-Renewed</td>
+                            <td style="padding: 15px 10px;"><span style="color: #10b981;">Info</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Maintenance -->
+            <div id="maintenance" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-gear" style="font-size: 2rem; color: #10b981;"></i>
+                        <h3 style="margin-bottom: 0;">Motor Wear</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem;">All units nominal</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-battery-half" style="font-size: 2rem; color: #f59e0b;"></i>
+                        <h3 style="margin-bottom: 0;">Battery Health</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem;">2 units need replacement</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-wifi" style="font-size: 2rem; color: #10b981;"></i>
+                        <h3 style="margin-bottom: 0;">Sensors</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Calibrated correctly</span>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-microchip" style="font-size: 2rem; color: #10b981;"></i>
+                        <h3 style="margin-bottom: 0;">Compute</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Temperatures normal</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <h3>OTA Firmware Updates</h3>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li
+                                style="padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div><strong style="display: block;">StacklyOS v4.2.1</strong> <span
+                                        style="font-size: 0.85rem; color: var(--text-light);">Critical Pathfinding
+                                        Patch</span></div>
+                                <a href="404.html" class="btn btn-primary"
+                                    style="padding: 5px 15px; font-size: 0.8rem;">Push Update</a>
+                            </li>
+                            <li
+                                style="padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div><strong style="display: block;">Kuka Driver v1.0.9</strong> <span
+                                        style="font-size: 0.85rem; color: var(--text-light);">Routine Driver
+                                        Update</span></div>
+                                <a href="404.html" class="btn btn-outline"
+                                    style="padding: 5px 15px; font-size: 0.8rem;">Schedule</a>
+                            </li>
+                            <li
+                                style="padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div><strong style="display: block;">DJI Vision v2.2</strong> <span
+                                        style="font-size: 0.85rem; color: var(--text-light);">Camera Calibration
+                                        Fix</span></div>
+                                <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;">Installed</span>
+                            </li>
+                            <li
+                                style="padding: 15px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                                <div><strong style="display: block;">Boston Dynamics Spot v3.0</strong> <span
+                                        style="font-size: 0.85rem; color: var(--text-light);">Major OS Upgrade</span>
+                                </div>
+                                <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;">Installed</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Schedule Service</h3>
+                        <p style="color: var(--text-light); margin-bottom: 20px; font-size: 0.9rem;">Dispatch a Stackly
+                            technician for hardware repairs.</p>
+                        <form style="display: flex; flex-direction: column; gap: 15px;">
+                            <select style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                <option>Select Unit</option>
+                                <option>Drone-Z1 (Battery Replacement)</option>
+                                <option>Kuka-Arm-X2 (Diagnostics)</option>
+                            </select>
+                            <input type="date"
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <a href="404.html" class="btn btn-primary" style="text-align: center;">Submit Request</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Hardware Telemetry -->
+            <div id="telemetry" class="tab-content">
+                <div class="content-panel" style="margin-bottom: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>Live Telemetry Stream</h3>
+                            <p style="color: var(--text-light); margin-bottom: 0;">Currently streaming: <strong
+                                    style="color: var(--color-primary);">AMR-Alpha-01</strong></p>
+                        </div>
+                        <a href="404.html" class="btn btn-outline">Change Unit</a>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <!-- 8 Telemetry Cards -->
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">LiDAR
+                            Status</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem; color: #10b981;">Online</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">360° Point Cloud Active</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Camera
+                            Feed</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem; color: #10b981;">1080p 60fps</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Latency: 45ms</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">CPU
+                            Temp</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem;">42°C</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Nominal Range</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Motor
+                            1 (Left) RPM</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem;">2450</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Torque: 12Nm</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Motor
+                            2 (Right) RPM</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem;">2448</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Torque: 12Nm</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Battery
+                            Voltage</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem;">48.2V</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Discharge: 2.1A</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Network
+                            Ping</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem;">12ms</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Signal: -45dBm (5G)</div>
+                    </div>
+                    <div class="content-panel" style="padding: 20px;">
+                        <span
+                            style="color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">IMU
+                            Calibration</span>
+                        <h3 style="margin: 10px 0; font-size: 1.5rem; color: #10b981;">Perfect</h3>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Gyro/Accel Synced</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- NEW TAB: Mission Planning (Commander) -->
+            <div id="mission" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);">
+                            <i class="fa-solid fa-route"></i></div>
+                        <div class="metric-data">
+                            <h3>14</h3>
+                            <p>Active Missions</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="fa-solid fa-leaf"></i></div>
+                        <div class="metric-data">
+                            <h3>85%</h3>
+                            <p>Avg Route Efficiency</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                            <i class="fa-solid fa-clock"></i></div>
+                        <div class="metric-data">
+                            <h3>1.2%</h3>
+                            <p>Delay Rate</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">
+                            <i class="fa-solid fa-bolt"></i></div>
+                        <div class="metric-data">
+                            <h3>-120kWh</h3>
+                            <p>Energy Savings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 25px;">
+                    <div class="content-panel" style="padding: 0; overflow: hidden; position: relative;">
+                        <div
+                            style="height: 400px; background: url('https://www.google.com/maps/vt/pb=!1m4!1m3!1i15!2i16223!3i18567!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0') center/cover;">
+                            <div
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2);">
+                                <div
+                                    style="position: absolute; top: 20px; left: 20px; background: white; padding: 10px 20px; border-radius: 8px; box-shadow: var(--shadow-md);">
+                                    <h4 style="margin: 0;"><i class="fa-solid fa-map-pin" style="color: #ef4444;"></i>
+                                        Route Alpha-1</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-light);">ETA: 14 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-panel">
+                        <h3>Waypoints List</h3>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
+                                <span
+                                    style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">1</span>
+                                Loading Bay D</li>
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
+                                <span
+                                    style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">2</span>
+                                Storage Aisle 12</li>
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
+                                <span
+                                    style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">3</span>
+                                Inspection Desk</li>
+                            <li
+                                style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
+                                <span
+                                    style="background: var(--text-light); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">4</span>
+                                Assembly Station C</li>
+                            <li style="padding: 10px 0; display: flex; align-items: center; gap: 15px;"><span
+                                    style="background: var(--text-light); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">5</span>
+                                Docking Charger</li>
+                        </ul>
+                        <a href="404.html" class="btn btn-outline"
+                            style="width: 100%; text-align: center; margin-top: 15px;">Edit Route</a>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    <h3>Active Mission Dispatch</h3>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 15px;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Mission ID</th>
+                            <th style="padding: 15px 10px;">Assigned Unit</th>
+                            <th style="padding: 15px 10px;">Progress</th>
+                            <th style="padding: 15px 10px;">Priority</th>
+                            <th style="padding: 15px 10px;">Status</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">MSN-4491</td>
+                            <td style="padding: 15px 10px;">AMR-Alpha-09</td>
+                            <td style="padding: 15px 10px;">
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 75%; background: #10b981; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">High</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">On
+                                    Schedule</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">MSN-4492</td>
+                            <td style="padding: 15px 10px;">Drone-Z1</td>
+                            <td style="padding: 15px 10px;">
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 12%; background: #3b82f6; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: #f59e0b; font-weight: 600;">Medium</span></td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">En
+                                    Route</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">MSN-4493</td>
+                            <td style="padding: 15px 10px;">Spot-Dog-1</td>
+                            <td style="padding: 15px 10px;">
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 98%; background: #10b981; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: var(--text-light); font-weight: 600;">Low</span></td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Returning</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">MSN-4494</td>
+                            <td style="padding: 15px 10px;">AMR-Beta-12</td>
+                            <td style="padding: 15px 10px;">
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 45%; background: #f59e0b; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">High</span>
+                            </td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Delayed</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; font-weight: 600;">MSN-4495</td>
+                            <td style="padding: 15px 10px;">Kuka-Arm-X1</td>
+                            <td style="padding: 15px 10px;">
+                                <div
+                                    style="width: 100%; background: var(--border-color); height: 8px; border-radius: 4px;">
+                                    <div style="width: 100%; background: #10b981; height: 100%; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: #f59e0b; font-weight: 600;">Medium</span></td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Completed</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Global Map (Teleops) -->
+            <div id="globalmap" class="tab-content">
+                <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 25px;">
+                    <div class="content-panel" style="padding: 0; overflow: hidden; position: relative;">
+                        <div
+                            style="height: 600px; background: url('https://www.google.com/maps/vt/pb=!1m4!1m3!1i15!2i16223!3i18567!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0') center/cover;">
+                            <!-- Simulated Map Pins -->
+                            <div
+                                style="position: absolute; top: 30%; left: 20%; background: #3b82f6; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);">
+                            </div>
+                            <div
+                                style="position: absolute; top: 40%; left: 25%; background: #10b981; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px rgba(16, 185, 129, 0.8);">
+                            </div>
+                            <div
+                                style="position: absolute; top: 35%; left: 55%; background: #ef4444; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);">
+                            </div>
+                            <div
+                                style="position: absolute; top: 60%; left: 75%; background: #3b82f6; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);">
+                            </div>
+                            <div
+                                style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 15px 25px; border-radius: 12px; box-shadow: var(--shadow-md); backdrop-filter: blur(10px);">
+                                <h3 style="margin: 0 0 5px;">Global Fleet</h3>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Monitoring 124 units
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="content-panel">
+                            <h3>Live Metrics</h3>
+                            <div
+                                style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                                <span style="color: var(--text-light);"><i class="fa-solid fa-signal"
+                                        style="margin-right: 5px;"></i> Avg Latency</span>
+                                <strong style="color: #10b981;">45ms</strong>
+                            </div>
+                            <div
+                                style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                                <span style="color: var(--text-light);"><i class="fa-solid fa-satellite-dish"
+                                        style="margin-right: 5px;"></i> Satellites</span>
+                                <strong>24 Active</strong>
+                            </div>
+                            <div
+                                style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--text-light);"><i class="fa-solid fa-tower-cell"
+                                        style="margin-right: 5px;"></i> Network Load</span>
+                                <strong>68%</strong>
+                            </div>
+                        </div>
+                        <div class="content-panel" style="flex: 1;">
+                            <h3>Regional Status</h3>
+                            <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                                <li style="margin-bottom: 15px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <strong>North America</strong>
+                                        <span style="color: #10b981;">Online (84 Units)</span>
+                                    </div>
+                                    <div
+                                        style="width: 100%; background: var(--border-color); height: 6px; border-radius: 3px;">
+                                        <div
+                                            style="width: 100%; background: #10b981; height: 100%; border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="margin-bottom: 15px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <strong>EMEA</strong>
+                                        <span style="color: #f59e0b;">Degraded (22 Units)</span>
+                                    </div>
+                                    <div
+                                        style="width: 100%; background: var(--border-color); height: 6px; border-radius: 3px;">
+                                        <div style="width: 60%; background: #f59e0b; height: 100%; border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <strong>APAC</strong>
+                                        <span style="color: #10b981;">Online (18 Units)</span>
+                                    </div>
+                                    <div
+                                        style="width: 100%; background: var(--border-color); height: 6px; border-radius: 3px;">
+                                        <div
+                                            style="width: 100%; background: #10b981; height: 100%; border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Remote Override (Teleops) -->
+            <div id="override" class="tab-content">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 25px;">
+                    <div class="content-panel"
+                        style="text-align: center; padding: 50px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, rgba(0,0,0,0) 70%);">
+                        <div
+                            style="width: 120px; height: 120px; background: rgba(59,130,246,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+                            <i class="fa-solid fa-gamepad" style="font-size: 4rem; color: var(--color-primary);"></i>
+                        </div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Command Console</h2>
+                        <p
+                            style="color: var(--text-light); max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem; line-height: 1.6;">
+                            Establish a direct, low-latency WebRTC connection to physically bypass autonomous
+                            sub-routines. Requires attached peripheral input.</p>
+                        <a href="404.html" class="btn btn-primary"
+                            style="padding: 18px 50px; font-size: 1.2rem; font-weight: 700; box-shadow: 0 10px 20px rgba(59,130,246,0.3); border-radius: 30px;"><i
+                                class="fa-solid fa-plug" style="margin-right: 10px;"></i> Connect Joystick</a>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 25px;">
+                        <div class="content-panel">
+                            <h3>Connection Health</h3>
+                            <div style="margin-top: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>WebRTC Handshake</span>
+                                    <span style="color: #10b981;">Verified</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Control Latency</span>
+                                    <strong style="color: #10b981;">
+                                        < 12ms</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Video Stream</span>
+                                    <strong>1080p @ 60fps</strong>
+                                </div>
+                            </div>
+                            <div
+                                style="height: 100px; margin-top: 20px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #10b981;"><i class="fa-solid fa-chart-area"></i> Stable
+                                    Signal</span>
+                            </div>
+                        </div>
+
+                        <div class="content-panel" style="flex: 1;">
+                            <h3>Recent Sessions</h3>
+                            <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                                <li
+                                    style="padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                    <div><strong style="display: block;">Drone-Z1</strong><span
+                                            style="font-size: 0.8rem; color: var(--text-light);">Duration: 12m
+                                            45s</span></div>
+                                    <span style="color: var(--text-light); font-size: 0.85rem;">Today 10:42 AM</span>
+                                </li>
+                                <li style="padding: 10px 0; display: flex; justify-content: space-between;">
+                                    <div><strong style="display: block;">AMR-Alpha-04</strong><span
+                                            style="font-size: 0.8rem; color: var(--text-light);">Duration: 2m 10s</span>
+                                    </div>
+                                    <span style="color: var(--text-light); font-size: 0.85rem;">Yesterday 4:15 PM</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    <h3>Available Units for Override</h3>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 15px;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Unit Name</th>
+                            <th style="padding: 15px 10px;">Current Task</th>
+                            <th style="padding: 15px 10px;">Risk Level</th>
+                            <th style="padding: 15px 10px;">Connection</th>
+                            <th style="padding: 15px 10px;">Action</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-09</td>
+                            <td style="padding: 15px 10px;">Path Blocked - Waiting</td>
+                            <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">High
+                                    (Stuck)</span></td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-wifi" style="color: #10b981;"></i>
+                                Excellent</td>
+                            <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-primary"
+                                    style="padding: 5px 15px; font-size: 0.85rem;">Intercept</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">Drone-Z2</td>
+                            <td style="padding: 15px 10px;">Visual Inspection</td>
+                            <td style="padding: 15px 10px;"><span style="color: #f59e0b; font-weight: 600;">Medium
+                                    (Complex)</span></td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-wifi" style="color: #10b981;"></i>
+                                Good</td>
+                            <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-outline"
+                                    style="padding: 5px 15px; font-size: 0.85rem;">Intercept</a></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X2</td>
+                            <td style="padding: 15px 10px;">Diagnostics</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: var(--text-light); font-weight: 600;">Low</span></td>
+                            <td style="padding: 15px 10px;"><i class="fa-solid fa-ethernet" style="color: #10b981;"></i>
+                                Wired</td>
+                            <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-outline"
+                                    style="padding: 5px 15px; font-size: 0.85rem;">Intercept</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Incident Reports (Teleops) -->
+            <div id="incidents" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card" style="border-left: 4px solid #ef4444;">
+                        <div class="metric-data">
+                            <h3 style="color: #ef4444;">4</h3>
+                            <p>Open Incidents</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>14m 20s</h3>
+                            <p>Avg Resolution Time</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #f59e0b;">
+                        <div class="metric-data">
+                            <h3>12</h3>
+                            <p>Critical Alerts (24h)</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>2.1%</h3>
+                            <p>False Positives</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3>Incident Log</h3>
+                            <a href="404.html" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.85rem;"><i
+                                    class="fa-solid fa-filter"></i> Filter</a>
+                        </div>
+                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                                <th style="padding: 15px 10px;">Incident ID</th>
+                                <th style="padding: 15px 10px;">Unit</th>
+                                <th style="padding: 15px 10px;">Description</th>
+                                <th style="padding: 15px 10px;">Status</th>
+                                <th style="padding: 15px 10px;">Action</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-092</td>
+                                <td style="padding: 15px 10px;">AMR-Alpha-09</td>
+                                <td style="padding: 15px 10px;">Collision avoidance triggered in Zone B</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #ef4444; font-weight: 600;">Unresolved</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-primary"
+                                        style="padding: 5px 15px; font-size: 0.8rem;">Review</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-091</td>
+                                <td style="padding: 15px 10px;">Kuka-Arm-X2</td>
+                                <td style="padding: 15px 10px;">Actuator over-torque detected</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #f59e0b; font-weight: 600;">Investigating</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-outline"
+                                        style="padding: 5px 15px; font-size: 0.8rem;">Update</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-090</td>
+                                <td style="padding: 15px 10px;">Drone-Z1</td>
+                                <td style="padding: 15px 10px;">Loss of GPS signal during flight</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Resolved</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary); font-size: 0.9rem;">View Log</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-089</td>
+                                <td style="padding: 15px 10px;">Agv-Load-4</td>
+                                <td style="padding: 15px 10px;">Battery dropped 15% in 2 mins</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Resolved</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary); font-size: 0.9rem;">View Log</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-088</td>
+                                <td style="padding: 15px 10px;">Spot-Dog-1</td>
+                                <td style="padding: 15px 10px;">Lost traction on ramp C</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Resolved</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary); font-size: 0.9rem;">View Log</a></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px 10px; font-weight: 600;">INC-087</td>
+                                <td style="padding: 15px 10px;">AMR-Alpha-01</td>
+                                <td style="padding: 15px 10px;">Network disconnect (30s)</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Resolved</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary); font-size: 0.9rem;">View Log</a></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>File New Report</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Manually log an operational
+                            irregularity.</p>
+                        <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <select
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                                <option>Select Unit ID</option>
+                                <option>AMR-Alpha-09</option>
+                                <option>Drone-Z1</option>
+                            </select>
+                            <select
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                                <option>Select Severity</option>
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>Critical</option>
+                            </select>
+                            <textarea rows="4" placeholder="Describe the incident..."
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); resize: none;"></textarea>
+                            <a href="404.html" class="btn btn-primary" style="text-align: center;">Submit Report</a>
+                        </form>
+                        
+                        <div style="margin-top: 30px; background: rgba(30, 112, 230, 0.05); padding: 20px; border-radius: 12px; border: 1px dashed var(--border-color);">
+                            <h4 style="font-size: 1rem; margin-bottom: 15px; color: var(--color-primary); display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-info-circle"></i> Reporting Guidelines
+                            </h4>
+                            <ul style="font-size: 0.9rem; color: var(--text-body); display: flex; flex-direction: column; gap: 12px; padding-left: 5px;">
+                                <li style="display: flex; align-items: flex-start; gap: 10px;">
+                                    <i class="fas fa-check" style="color: #10b981; margin-top: 4px;"></i>
+                                    <span>Include exact error codes if displayed on the unit's interface.</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 10px;">
+                                    <i class="fas fa-check" style="color: #10b981; margin-top: 4px;"></i>
+                                    <span>For critical severity incidents, please contact the floor supervisor directly.</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 10px;">
+                                    <i class="fas fa-check" style="color: #10b981; margin-top: 4px;"></i>
+                                    <span>Attach relevant telemetry logs via the main dashboard if needed.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Diagnostics (Technician) -->
+            <div id="diagnostics" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card" style="border-left: 4px solid #ef4444;">
+                        <div class="metric-data">
+                            <h3 style="color: #ef4444;">Error Code 4042</h3>
+                            <p>Kuka Arm - Joint 3 Actuator</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #f59e0b;">
+                        <div class="metric-data">
+                            <h3 style="color: #f59e0b;">Battery Depleted</h3>
+                            <p>Agv-Load-4 - Main Cell</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #10b981;">
+                        <div class="metric-data">
+                            <h3 style="color: #10b981;">System Nominal</h3>
+                            <p>AMR Transport Fleet</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #10b981;">
+                        <div class="metric-data">
+                            <h3 style="color: #10b981;">System Nominal</h3>
+                            <p>Drone Aerial Fleet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <h3>Diagnostic Scan History</h3>
+                        <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 15px;">
+                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                                <th style="padding: 15px 10px;">Date/Time</th>
+                                <th style="padding: 15px 10px;">Unit ID</th>
+                                <th style="padding: 15px 10px;">Scan Type</th>
+                                <th style="padding: 15px 10px;">Result</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">Today 08:30 AM</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X2</td>
+                                <td style="padding: 15px 10px;">Full OBD-II</td>
+                                <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">Fail
+                                        (Code 4042)</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">Yesterday 14:15 PM</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-01</td>
+                                <td style="padding: 15px 10px;">LiDAR Calibration</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Pass</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">Aug 12, 09:00 AM</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Drone-Z1</td>
+                                <td style="padding: 15px 10px;">Battery Stress Test</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Pass</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; color: var(--text-light);">Aug 10, 16:45 PM</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Agv-Load-4</td>
+                                <td style="padding: 15px 10px;">Motor Resistance</td>
+                                <td style="padding: 15px 10px;"><span style="color: #f59e0b; font-weight: 600;">Warning
+                                        (1.2Ω)</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px 10px; color: var(--text-light);">Aug 08, 11:20 AM</td>
+                                <td style="padding: 15px 10px; font-weight: 600;">Spot-Dog-1</td>
+                                <td style="padding: 15px 10px;">Joint Actuator Scan</td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #10b981; font-weight: 600;">Pass</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>Run Deep Scan</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Connect OBD-II or wireless debugger to
+                            initiate.</p>
+                        <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <input type="text" placeholder="Scan Target (IP or ID)"
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            <div
+                                style="display: flex; flex-direction: column; gap: 10px; background: var(--bg-secondary); padding: 15px; border-radius: 8px;">
+                                <label><input type="checkbox" checked> Core Logic Board</label>
+                                <label><input type="checkbox" checked> Motor Controllers</label>
+                                <label><input type="checkbox" checked> Sensor Array</label>
+                                <label><input type="checkbox"> Battery Cell Balance</label>
+                                <label><input type="checkbox"> Network Interfaces</label>
+                            </div>
+                            <a href="404.html" class="btn btn-primary" style="text-align: center;"><i
+                                    class="fa-solid fa-play" style="margin-right: 8px;"></i> Initiate Scan</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Parts Inventory (Technician) -->
+            <div id="inventory" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>1,240</h3>
+                            <p>Total SKUs Tracked</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #ef4444;">
+                        <div class="metric-data">
+                            <h3 style="color: #ef4444;">12</h3>
+                            <p>Low Stock Alerts</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #f59e0b;">
+                        <div class="metric-data">
+                            <h3 style="color: #f59e0b;">4</h3>
+                            <p>Pending Orders</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>$84,200</h3>
+                            <p>Est. Inventory Value</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3>Local Parts Inventory</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" placeholder="Search SKU..."
+                                    style="padding: 8px 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                                <a href="404.html" class="btn btn-outline" style="padding: 8px 15px;"><i
+                                        class="fa-solid fa-barcode"></i> Scan</a>
+                            </div>
+                        </div>
+                        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                                <th style="padding: 15px 10px;">Part SKU</th>
+                                <th style="padding: 15px 10px;">Description</th>
+                                <th style="padding: 15px 10px;">Category</th>
+                                <th style="padding: 15px 10px;">Stock</th>
+                                <th style="padding: 15px 10px;">Action</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-BAT-900</td>
+                                <td style="padding: 15px 10px;">High-Cap Lithium Battery</td>
+                                <td style="padding: 15px 10px;">Power</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;">45
+                                        Units</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary);">Details</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-MOT-120</td>
+                                <td style="padding: 15px 10px;">Brushless DC Motor (12V)</td>
+                                <td style="padding: 15px 10px;">Actuation</td>
+                                <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">2 Units
+                                        (Low)</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html" class="btn btn-primary"
+                                        style="padding: 5px 10px; font-size: 0.8rem;">Reorder</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-SEN-044</td>
+                                <td style="padding: 15px 10px;">2D LiDAR Puck</td>
+                                <td style="padding: 15px 10px;">Sensors</td>
+                                <td style="padding: 15px 10px;"><span style="color: #f59e0b; font-weight: 600;">8
+                                        Units</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary);">Details</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-WHL-200</td>
+                                <td style="padding: 15px 10px;">Mecanum Wheel Assembly</td>
+                                <td style="padding: 15px 10px;">Hardware</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;">120
+                                        Units</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary);">Details</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-CBL-010</td>
+                                <td style="padding: 15px 10px;">CAN Bus Cable (1m)</td>
+                                <td style="padding: 15px 10px;">Wiring</td>
+                                <td style="padding: 15px 10px;"><span style="color: #10b981; font-weight: 600;">500+
+                                        Units</span></td>
+                                <td style="padding: 15px 10px;"><a href="404.html"
+                                        style="color: var(--color-primary);">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px 10px; font-weight: 600;">SKU-CAM-8K</td>
+                                <td style="padding: 15px 10px;">Stereo Vision Camera Array</td>
+                                <td style="padding: 15px 10px;">Sensors</td>
+                                <td style="padding: 15px 10px;"><span style="color: #ef4444; font-weight: 600;">0 Units
+                                        (Out)</span></td>
+                                <td style="padding: 15px 10px;"><span
+                                        style="color: #f59e0b; font-size: 0.85rem;">Ordered (ETA 2d)</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>Request Parts</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Submit a procurement request to central
+                            logistics.</p>
+                        <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <input type="text" placeholder="SKU or Part Name"
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            <input type="number" placeholder="Quantity Needed"
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            <select
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                                <option>Standard Delivery (3-5 days)</option>
+                                <option>Expedited (Overnight)</option>
+                                <option>AOG / Critical (Same Day)</option>
+                            </select>
+                            <textarea rows="3" placeholder="Reason for request..."
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); resize: none;"></textarea>
+                            <a href="404.html" class="btn btn-primary" style="text-align: center;">Submit Request</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW TAB: Repair Logs (Technician) -->
+            <div id="repairlogs" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>142</h3>
+                            <p>Repairs This Month</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>1.4 hrs</h3>
+                            <p>Avg Repair Time</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-data">
+                            <h3>LiDAR Puck</h3>
+                            <p>Most Replaced Part</p>
+                        </div>
+                    </div>
+                    <div class="metric-card" style="border-left: 4px solid #10b981;">
+                        <div class="metric-data">
+                            <h3 style="color: #10b981;">98%</h3>
+                            <p>First-Time Fix Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Comprehensive Repair Logs</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="404.html" class="btn btn-outline" style="padding: 8px 15px;"><i
+                                    class="fa-solid fa-download"></i> Export Logs</a>
+                            <a href="404.html" class="btn btn-primary" style="padding: 8px 15px;"><i
+                                    class="fa-solid fa-plus"></i> New Entry</a>
+                        </div>
+                    </div>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Date</th>
+                            <th style="padding: 15px 10px;">Unit ID</th>
+                            <th style="padding: 15px 10px;">Action Taken</th>
+                            <th style="padding: 15px 10px;">Parts Consumed</th>
+                            <th style="padding: 15px 10px;">Time Spent</th>
+                            <th style="padding: 15px 10px;">Technician</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 14, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-02</td>
+                            <td style="padding: 15px 10px;">Replaced faulty LiDAR module</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: var(--bg-secondary); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.85rem;">SKU-SEN-044
+                                    x1</span></td>
+                            <td style="padding: 15px 10px;">1h 15m</td>
+                            <td style="padding: 15px 10px;">Tech_Dave</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 13, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">Drone-Z2</td>
+                            <td style="padding: 15px 10px;">Cleaned and re-calibrated vision array</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: var(--text-light); font-size: 0.85rem;">None</span></td>
+                            <td style="padding: 15px 10px;">0h 45m</td>
+                            <td style="padding: 15px 10px;">Tech_Sarah</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 11, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">Kuka-Arm-X1</td>
+                            <td style="padding: 15px 10px;">Lubricated Joint 2 and Joint 3</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: var(--bg-secondary); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.85rem;">Consumable
+                                    Lube x1</span></td>
+                            <td style="padding: 15px 10px;">2h 30m</td>
+                            <td style="padding: 15px 10px;">Tech_Dave</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 10, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">Agv-Load-4</td>
+                            <td style="padding: 15px 10px;">Replaced all 4 Mecanum wheels</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: var(--bg-secondary); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.85rem;">SKU-WHL-200
+                                    x4</span></td>
+                            <td style="padding: 15px 10px;">1h 00m</td>
+                            <td style="padding: 15px 10px;">Tech_Mike</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 08, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">Spot-Dog-1</td>
+                            <td style="padding: 15px 10px;">Firmware rollback after crash</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="color: var(--text-light); font-size: 0.85rem;">None</span></td>
+                            <td style="padding: 15px 10px;">3h 15m</td>
+                            <td style="padding: 15px 10px;">Tech_Sarah</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 05, 2026</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">AMR-Alpha-09</td>
+                            <td style="padding: 15px 10px;">Swapped main battery cell</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: var(--bg-secondary); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); font-size: 0.85rem;">SKU-BAT-900
+                                    x1</span></td>
+                            <td style="padding: 15px 10px;">0h 20m</td>
+                            <td style="padding: 15px 10px;">Tech_Dave</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- Tab: Settings -->
+            <div id="settings" class="tab-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div class="content-panel">
+                        <h3>Profile Information</h3>
+                        <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem;">Email
+                                    Address</label>
+                                <input type="email" value="admin@stackly.com"
+                                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            </div>
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem;">Full
+                                    Name</label>
+                                <input type="text" value="System Administrator"
+                                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            </div>
+                            <a href="404.html" class="btn btn-primary" style="align-self: flex-start;">Save Changes</a>
+                        </form>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>Security Settings</h3>
+                        <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem;">Change
+                                    Password</label>
+                                <input type="password" placeholder="New Password"
+                                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); margin-bottom: 10px;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="2fa" checked>
+                                <label for="2fa" style="font-weight: 600; font-size: 0.9rem;">Enable Two-Factor
+                                    Authentication (2FA)</label>
+                            </div>
+                            <a href="404.html" class="btn btn-primary" style="align-self: flex-start;">Update
+                                Security</a>
+                        </form>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>Notification Preferences</h3>
+                        <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="notif1" checked>
+                                <label for="notif1" style="font-weight: 600; font-size: 0.9rem;">Email Alerts for
+                                    Critical Hardware Failures</label>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="notif2" checked>
+                                <label for="notif2" style="font-weight: 600; font-size: 0.9rem;">SMS Alerts for Security
+                                    Breaches</label>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="notif3">
+                                <label for="notif3" style="font-weight: 600; font-size: 0.9rem;">Weekly Analytics Report
+                                    Email</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-panel">
+                        <h3>API & Developer Options</h3>
+                        <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem;">Active
+                                    API Key</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" value="sk_test_98f7a6s5d4f3g2h1" disabled
+                                        style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                                    <a href="404.html" class="btn btn-outline">Revoke</a>
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem;">Webhook
+                                    URL</label>
+                                <input type="text" placeholder="https://yourserver.com/webhook"
+                                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary);">
+                            </div>
+                            <div
+                                style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                                <a href="404.html" style="color: #ef4444; font-weight: 600; font-size: 0.9rem;">Delete
+                                    Account Permanently</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Support -->
+            <div id="support" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-comments" style="font-size: 2rem; color: var(--color-primary);"></i>
+                        <h3 style="margin-bottom: 0;">Live Chat</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">Available 24/7
+                            for Fleet Commanders.</span>
+                        <a href="404.html" class="btn btn-primary" style="padding: 5px 15px; font-size: 0.85rem;">Start
+                            Chat</a>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-phone" style="font-size: 2rem; color: var(--color-primary);"></i>
+                        <h3 style="margin-bottom: 0;">Call Support</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">Premium hardware
+                            support hotline.</span>
+                        <a href="404.html" class="btn btn-primary" style="padding: 5px 15px; font-size: 0.85rem;">+1
+                            (800) 555-0199</a>
+                    </div>
+                    <div class="metric-card"
+                        style="flex-direction: column; align-items: center; gap: 10px; padding: 20px; text-align: center;">
+                        <i class="fa-solid fa-book" style="font-size: 2rem; color: var(--color-primary);"></i>
+                        <h3 style="margin-bottom: 0;">Knowledge Base</h3>
+                        <span style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">Documentation
+                            and API guides.</span>
+                        <a href="404.html" class="btn btn-primary" style="padding: 5px 15px; font-size: 0.85rem;">Browse
+                            Docs</a>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Support Ticket History</h3>
+                        <a href="404.html" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem;">Open
+                            New Ticket</a>
+                    </div>
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-light);">
+                            <th style="padding: 15px 10px;">Ticket ID</th>
+                            <th style="padding: 15px 10px;">Subject</th>
+                            <th style="padding: 15px 10px;">Status</th>
+                            <th style="padding: 15px 10px;">Last Updated</th>
+                            <th style="padding: 15px 10px;">Action</th>
+                        </tr>
+                        <!-- 5 Rows -->
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">#TCK-9092</td>
+                            <td style="padding: 15px 10px;">Kuka Arm joint calibration issue</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Open</span>
+                            </td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">2 hours ago</td>
+                            <td style="padding: 15px 10px;"><a href="404.html"
+                                    style="color: var(--color-primary);">View</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">#TCK-8812</td>
+                            <td style="padding: 15px 10px;">API Webhook not firing for AMR units</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Resolved</span>
+                            </td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Yesterday</td>
+                            <td style="padding: 15px 10px;"><a href="404.html"
+                                    style="color: var(--color-primary);">View</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">#TCK-8750</td>
+                            <td style="padding: 15px 10px;">Request for 10 additional user seats</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Resolved</span>
+                            </td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 10, 2026</td>
+                            <td style="padding: 15px 10px;"><a href="404.html"
+                                    style="color: var(--color-primary);">View</a></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 15px 10px; font-weight: 600;">#TCK-8601</td>
+                            <td style="padding: 15px 10px;">Drone battery replacement schedule</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Resolved</span>
+                            </td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Aug 02, 2026</td>
+                            <td style="padding: 15px 10px;"><a href="404.html"
+                                    style="color: var(--color-primary);">View</a></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; font-weight: 600;">#TCK-8220</td>
+                            <td style="padding: 15px 10px;">Boston Dynamics Spot API Integration</td>
+                            <td style="padding: 15px 10px;"><span
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Resolved</span>
+                            </td>
+                            <td style="padding: 15px 10px; color: var(--text-light);">Jul 15, 2026</td>
+                            <td style="padding: 15px 10px;"><a href="404.html"
+                                    style="color: var(--color-primary);">View</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check auth state
+            const userJSON = localStorage.getItem('currentUser');
+            if (!userJSON) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = JSON.parse(userJSON);
+            document.getElementById('userEmail').textContent = user.email.split('@')[0];
+            document.getElementById('navDashboardTitle').textContent = user.role + ' Dashboard';
+
+            // Filter sidebar menu items based on role
+            const menuItems = document.querySelectorAll('.sidebar-menu li');
+            menuItems.forEach(item => {
+                const allowedRoles = item.getAttribute('data-roles');
+                if (allowedRoles && !allowedRoles.includes(user.role)) {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Update sidebar profile
+            document.getElementById('sidebarUserName').textContent = user.email.split('@')[0];
+            document.getElementById('userAvatar').src = `https://ui-avatars.com/api/?name=${user.email.split('@')[0]}&background=0ea5e9&color=fff&rounded=true`;
+
+            // Sidebar toggling (Mobile)
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('show');
+                if (sidebar.classList.contains('show')) {
+                    document.body.classList.add('sidebar-open');
+                    document.documentElement.classList.add('sidebar-open');
+                } else {
+                    document.body.classList.remove('sidebar-open');
+                    document.documentElement.classList.remove('sidebar-open');
+                }
+            });
+
+            // Tab switching
+            const links = document.querySelectorAll('.sidebar-link');
+            const tabs = document.querySelectorAll('.tab-content');
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Remove active from all
+                    links.forEach(l => l.classList.remove('active'));
+                    tabs.forEach(t => t.classList.remove('active'));
+
+                    // Add active to current
+                    link.classList.add('active');
+                    const targetId = link.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+
+                    // On mobile, close sidebar after clicking
+                    if (window.innerWidth <= 991) {
+                        sidebar.classList.remove('show');
+                        document.body.classList.remove('sidebar-open');
+                        document.documentElement.classList.remove('sidebar-open');
+                    }
+                });
+            });
+        });
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        function goToFirstVisibleTab(e) {
+            e.preventDefault();
+            const menuItems = document.querySelectorAll('.sidebar-menu li');
+            for (let item of menuItems) {
+                if (item.style.display !== 'none') {
+                    const link = item.querySelector('.sidebar-link');
+                    if (link) {
+                        link.click();
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

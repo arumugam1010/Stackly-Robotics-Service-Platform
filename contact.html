@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Stackly Robotics Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- Back to top button -->
+    <a href="#" id="backToTop" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+
+    <!-- Navbar Section -->
+    <header class="navbar-area">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img">
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Robotics Platform</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+
+                <div class="mobile-sidebar-extra">
+                    <a href="login.html" class="btn w-100 btn-login" style="margin-bottom: 10px;">
+                        Login <i class="fa-regular fa-circle-user"></i>
+                    </a>
+                    <a href="register.html" class="btn btn-primary w-100" style="margin-bottom: 25px;">
+                        Register
+                    </a>
+                    
+                    <div class="sidebar-contact">
+                        <h5>CONTACT INFO</h5>
+                        
+                        <div class="contact-item">
+                            <span class="label">PHONE</span>
+                            <span class="value">+1-800-STACKLY-911</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">EMAIL</span>
+                            <span class="value">info@stackly.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">LOCATION</span>
+                            <span class="value">Stackly, Salem</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-right nav-auth-buttons" style="display: flex; gap: 15px; align-items: center;">
+                <a href="login.html" class="btn btn-outline" id="navLoginBtn" style="padding: 10px 20px; border: 2px solid var(--color-primary); color: var(--color-primary); border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">Login</a>
+                <a href="register.html" class="btn btn-primary" id="navRegisterBtn">Register</a>
+                <a href="dashboard.html" class="btn btn-primary" id="navDashboardBtn" style="display: none;">Dashboard</a>
+                <button class="btn btn-outline" id="navLogoutBtn" style="display: none; padding: 10px 20px; border: 2px solid #ef4444; color: #ef4444; border-radius: 8px; font-weight: 600; background: transparent; cursor: pointer;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Breadcrumb Header with Image Hero Section Layout -->
+    <section class="breadcrumb-header"
+        style="background-image: linear-gradient(rgba(10, 25, 47, 0.72), rgba(15, 32, 67, 0.78)), url('assets/robot_contact.webp');">
+        <div class="container">
+            <h1>Contact Consultation</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <span>Contact</span>
+            </div>
+            <p
+                style="margin-top:20px; font-size:1.15rem; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--text-light);">
+                Ready to deploy Stackly in your fulfillment center? Speak directly to our integrations support team.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Contact Section -->
+        <section class="faq-section section-padding">
+            <div class="container">
+                <div class="faq-layout" style="grid-template-columns: 0.9fr 1.1fr; gap: 60px;">
+
+                    <div>
+                        <span class="sub-title">GET IN TOUCH</span>
+                        <h2>Consult Our Robotics Engineers Today</h2>
+                        <p style="margin-bottom: 40px;">Ready to deploy Stackly in your fulfillment center? Fill out
+                            the inquiry sheet, and our integrations team will call you within 24 hours.</p>
+
+                        <ul class="contact-details" style="color: var(--text-heading); font-weight: 500;">
+                            <li style="margin-bottom: 25px;"><i class="fa-solid fa-phone"
+                                    style="font-size: 1.3rem;"></i> <a href="tel:+61383766284"
+                                    style="font-size: 1.1rem;">+61 3 8376 6284</a></li>
+                            <li style="margin-bottom: 25px;"><i class="fa-solid fa-envelope"
+                                    style="font-size: 1.3rem;"></i> <a href="mailto:Info@stackly.com"
+                                    style="font-size: 1.1rem;">Info@stackly.com</a></li>
+                            <li style="margin-bottom: 25px; display: flex; gap: 15px;"><i class="fa-solid fa-location-dot"
+                                    style="font-size: 1.3rem; margin-top: 5px;"></i> <span style="font-size: 1.1rem;"><strong>Headquarters</strong><br>Chinna Tirupathi,<br>Salem - 636008, Tamil Nadu</span></li>
+                        </ul>
+                        
+                        <div class="map-container" style="margin-top: 40px; box-shadow: var(--shadow-md); border-radius: 12px; overflow: hidden;">
+                            <iframe src="https://maps.google.com/maps?q=Chinna%20Tirupathi,%20Salem&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="faq-form-col">
+                        <div class="contact-card">
+                            <h3>Request Platform Demo</h3>
+                            <p>Outline your fleet size and robotic hardware constraints to receive a tailored sandbox
+                                setup.</p>
+
+                            <form id="contactForm" class="contact-form">
+                                <div class="form-group">
+                                    <input type="text" id="name" placeholder="Your Name:" required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" placeholder="Your Email:" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="phone" placeholder="Phone Number:" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" rows="4" placeholder="Briefly describe your robotics fleet:"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100" onclick="window.location.href='404.html'; return false;">Submit Request <i
+                                        class="fa-solid fa-arrow-right-long"></i></button>
+                            </form>
+                            <div id="formSuccess" class="form-success-msg">Thank you! Your message has been sent
+                                successfully.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Level Agreements (SLA) & Timeline Section -->
+        <section class="section-padding"
+            style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">OUR SUPPORT PROMISE</span>
+                    <h2>Enterprise Integration Support</h2>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="stat-item">
+                        <h4>24-Hour Call SLA</h4>
+                        <p style="font-size:0.9rem; font-weight:normal; margin-top:10px;">Immediate callback assignments
+                            for system down conditions.</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Sandbox Setup in 2 Days</h4>
+                        <p style="font-size:0.9rem; font-weight:normal; margin-top:10px;">Get a simulation setup of your
+                            floor plan mapped directly.</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>On-Site Engineers</h4>
+                        <p style="font-size:0.9rem; font-weight:normal; margin-top:10px;">Deployment support staff
+                            dispatched directly to your logistics center.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Global Office Locations -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">OUR OFFICES</span>
+                    <h2>Global Offices</h2>
+                </div>
+                <div class="projects-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <div class="service-card" style="padding:20px;">
+                        <h4>Salem (HQ)</h4>
+                        <p style="font-size:0.85rem; margin-top:5px; color:var(--text-light);">Chinna Tirupathi,
+                            Salem - 627, Tamil Nadu</p>
+                    </div>
+                    <div class="service-card" style="padding:20px;">
+                        <h4>Munich Office</h4>
+                        <p style="font-size:0.85rem; margin-top:5px; color:var(--text-light);">Lindenstrasse 45, 80331
+                            Munich, Germany</p>
+                    </div>
+                    <div class="service-card" style="padding:20px;">
+                        <h4>Tokyo Office</h4>
+                        <p style="font-size:0.85rem; margin-top:5px; color:var(--text-light);">2-chōme Shiba, Minato
+                            City, Tokyo 105-0014</p>
+                    </div>
+                    <div class="service-card" style="padding:20px;">
+                        <h4>Austin Office</h4>
+                        <p style="font-size:0.85rem; margin-top:5px; color:var(--text-light);">600 Congress Ave, Austin,
+                            Texas 78701</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-area">
+        <div class="container footer-widgets">
+            <div class="widget widget-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img" style="margin-bottom: 25px; height: 40px;">
+                    </a>
+                </div>
+                <p style="color: #a1a1aa;">Enterprise robotics cloud management software. Accelerating operations, safety audits, and automated dispatch operations.</p>
+                <div class="social-links">
+                    <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-github"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-discord"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h4>PLATFORM</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Fleet Management</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Pathfinding</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Hardware Abstraction</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Security & Auditing</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Platform Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>RESOURCES</h4>
+                <ul class="footer-links">
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Case Studies</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Integrations</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Robotics Blog</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Developer API</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> System Status</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>COMPANY</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Robotics Platform</a></li>
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Projects</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>LEGAL</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Safety Standards</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Compliance</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> GDPR</a></li>
+                </ul>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email" aria-label="Email">
+                    <button type="button" onclick="window.location.href='404.html'">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p class="copyright">&copy; 2026 Stackly Inc. All rights reserved.</p>
+                <div class="system-status">
+                    <span class="status-dot"></span> All systems operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script File -->
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Service Platform Modules - Stackly</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- Back to top button -->
+    <a href="#" id="backToTop" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+
+    <!-- Navbar Section -->
+    <header class="navbar-area">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img">
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html" class="active">Robotics Platform</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="mobile-sidebar-extra">
+                    <a href="login.html" class="btn w-100 btn-login" style="margin-bottom: 10px;">
+                        Login <i class="fa-regular fa-circle-user"></i>
+                    </a>
+                    <a href="register.html" class="btn btn-primary w-100" style="margin-bottom: 25px;">
+                        Register
+                    </a>
+                    
+                    <div class="sidebar-contact">
+                        <h5>CONTACT INFO</h5>
+                        
+                        <div class="contact-item">
+                            <span class="label">PHONE</span>
+                            <span class="value">+1-800-STACKLY-911</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">EMAIL</span>
+                            <span class="value">info@stackly.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">LOCATION</span>
+                            <span class="value">Stackly, Salem</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-right nav-auth-buttons" style="display: flex; gap: 15px; align-items: center;">
+                <a href="login.html" class="btn btn-outline" id="navLoginBtn" style="padding: 10px 20px; border: 2px solid var(--color-primary); color: var(--color-primary); border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">Login</a>
+                <a href="register.html" class="btn btn-primary" id="navRegisterBtn">Register</a>
+                <a href="dashboard.html" class="btn btn-primary" id="navDashboardBtn" style="display: none;">Dashboard</a>
+                <button class="btn btn-outline" id="navLogoutBtn" style="display: none; padding: 10px 20px; border: 2px solid #ef4444; color: #ef4444; border-radius: 8px; font-weight: 600; background: transparent; cursor: pointer;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Breadcrumb Header with Image Hero Section Layout -->
+    <section class="breadcrumb-header"
+        style="background-image: linear-gradient(rgba(10, 25, 47, 0.72), rgba(15, 32, 67, 0.78)), url('assets/industrial_factory.webp');">
+        <div class="container">
+            <h1>Robotics Service Platform Modules</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <span>Robotics Platform
+                    Modules</span>
+            </div>
+            <p
+                style="margin-top:20px; font-size:1.15rem; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--text-light);">
+                Smarter operations orchestration. Low latency telemetry streaming, SLAM mapping, and hardware
+                integration endpoints.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Platform Services Section -->
+        <section class="services-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">CORE MODULES</span>
+                    <h2>Robotics Orchestration Architecture (10+ Capabilities)</h2>
+                    <p style="max-width:700px; margin: 15px auto 0 auto;">Our platform acts as a bridge between the
+                        physical factory floor and cloud automation, featuring specialized modules for security,
+                        pathfinding, and data extraction.</p>
+                </div>
+
+                <div class="projects-grid" style="grid-template-columns: repeat(2, 1fr); gap: 30px;">
+
+                    <!-- Module 1 -->
+                    <div class="service-card reveal-up">
+                        <div class="icon-box"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                        <h3>1. Fleet Navigation & Mapping</h3>
+                        <p>Generate highly accurate SLAM layouts of warehouses or production plants in under 30 minutes.
+                            Edit navigation corridors, prohibited areas, and speed limits dynamically via our cloud map
+                            editor.</p>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="icon-box"><i class="fa-solid fa-circle-nodes"></i></div>
+                        <h3>2. Hardware Abstraction Layer (HAL)</h3>
+                        <p>Write generic high-level tasks like "MoveToPoint" or "PickItem" and our platform translates
+                            them to native machine actions for MiR, Kuka, Universal Robots, Fetch, and Omron units.</p>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3>3. Coordinated Traffic Control</h3>
+                        <p>Mitigate narrow-aisle gridlocks and layout blockages with our central scheduling engine.
+                            Units coordinate travel precedence calculations locally to maintain zero collisions.</p>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.3s;">
+                        <div class="icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3>4. Operational Telemetry & Insights</h3>
+                        <p>Capture battery health metrics, mechanical load profiles, error state history, and charging
+                            duration performance. Export reports directly to ERP and cloud analytics tools.</p>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="service-card reveal-up">
+                        <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>5. Zero-Trust Fleet Security</h3>
+                        <p>Continuous validation of instructions. End-to-end payload signature encryption keeps
+                            unauthorized external overrides completely blocked.</p>
+                    </div>
+
+                    <!-- Module 6 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="icon-box"><i class="fa-solid fa-download"></i></div>
+                        <h3>6. Over-The-Air (OTA) Updates</h3>
+                        <p>Safely distribute software updates, localization configurations, and mapping profiles to all
+                            connected models simultaneously during low-demand periods.</p>
+                    </div>
+
+                    <!-- Module 7 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="icon-box"><i class="fa-solid fa-battery-three-quarters"></i></div>
+                        <h3>7. Autonomous Docking & Charging</h3>
+                        <p>Automatical optimization of battery levels. Fleet units dispatch themselves to docking bays
+                            when capacity thresholds drop below 20%.</p>
+                    </div>
+
+                    <!-- Module 8 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.3s;">
+                        <div class="icon-box"><i class="fa-solid fa-link"></i></div>
+                        <h3>8. SAP & ERP Integration</h3>
+                        <p>Out-of-the-box REST API and MQTT message loops that communicate directly with warehouse
+                            management platforms like SAP, Oracle, and Microsoft Dynamics.</p>
+                    </div>
+
+                    <!-- Module 9 -->
+                    <div class="service-card reveal-up">
+                        <div class="icon-box"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3>9. Emergency Remote Override</h3>
+                        <p>Live fallback control dashboard to manually override autonomous actions in the event of
+                            unforeseen path obstructions or blockages.</p>
+                    </div>
+
+                    <!-- Module 10 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="icon-box"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>10. Dynamic Safety Envelopes</h3>
+                        <p>Safety parameters automatically scale based on current robot payload weights, preventing
+                            tipping and payload slip risks on ramps.</p>
+                    </div>
+
+                    <!-- Module 11 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="icon-box"><i class="fa-solid fa-hourglass-half"></i></div>
+                        <h3>11. Dynamic Queue Scheduling</h3>
+                        <p>Real-time queue re-prioritization algorithms that adjust dispatch lists based on shipping
+                            deadlines and delivery speeds.</p>
+                    </div>
+
+                    <!-- Module 12 -->
+                    <div class="service-card reveal-up" style="animation-delay: 0.3s;">
+                        <div class="icon-box"><i class="fa-solid fa-battery-empty"></i></div>
+                        <h3>12. Predictive Battery Health</h3>
+                        <p>Continuous monitoring of voltage degradation curves to identify battery packs requiring
+                            preventive replacement before failure.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-area">
+        <div class="container footer-widgets">
+            <div class="widget widget-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img" style="margin-bottom: 25px; height: 40px;">
+                    </a>
+                </div>
+                <p style="color: #a1a1aa;">Enterprise robotics cloud management software. Accelerating operations, safety audits, and automated dispatch operations.</p>
+                <div class="social-links">
+                    <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-github"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-discord"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h4>PLATFORM</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Fleet Management</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Pathfinding</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Hardware Abstraction</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Security & Auditing</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Platform Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>RESOURCES</h4>
+                <ul class="footer-links">
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Case Studies</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Integrations</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Robotics Blog</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Developer API</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> System Status</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>COMPANY</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Robotics Platform</a></li>
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Projects</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>LEGAL</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Safety Standards</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Compliance</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> GDPR</a></li>
+                </ul>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email" aria-label="Email">
+                    <button type="button" onclick="window.location.href='404.html'">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p class="copyright">&copy; 2026 Stackly Inc. All rights reserved.</p>
+                <div class="system-status">
+                    <span class="status-dot"></span> All systems operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script File -->
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

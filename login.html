@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Stackly Enterprise Robotics</title>
+    <meta name="description" content="Login to your Stackly Robotics Cloud Management Portal.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+    <main>
+        <section class="login-section" style="min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--bg-secondary);">
+            
+            <!-- Animated Background -->
+            <div class="animated-bg-container">
+                <div class="animated-bg-image" style="background-image: url('assets/robot.webp');"></div>
+                <div class="scanner-line"></div>
+                <div class="bg-overlay"></div>
+            </div>
+
+            <div class="container" style="max-width: 500px; position: relative; z-index: 10;">
+                <div class="contact-card auth-glass-card">
+                    <div class="text-center" style="margin-bottom: 30px;">
+                        <div style="text-align: left; margin-bottom: 15px;">
+                            <a href="index.html" style="color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500;"><i class="fa-solid fa-arrow-left" style="margin-right: 5px;"></i> Back to Home</a>
+                        </div>
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to access your dashboard.</p>
+                    </div>
+
+                    <form id="loginForm" class="contact-form">
+                        <div id="errorMsg" style="display: none; color: #ef4444; background: #fee2e2; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;"></div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Email Address</label>
+                            <input type="email" id="email" placeholder="admin@stackly.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Password</label>
+                            <div style="position: relative;">
+                                <input type="password" id="password" placeholder="••••••••" required style="padding-right: 45px;">
+                                <i class="fa-solid fa-eye" onclick="togglePassword('password', this)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-light);"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Account Role</label>
+                            <select id="role" style="width: 100%; padding: 15px 20px; border-radius: 10px; border: 1px solid var(--border-color); background-color: var(--bg-primary); font-family: var(--font-body); font-size: 0.95rem; color: var(--text-heading); outline: none;">
+                                <option value="Fleet Commander">Fleet Commander</option>
+                                <option value="Teleops Engineer">Teleops Engineer</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">Sign In <i class="fa-solid fa-right-to-bracket"></i></button>
+                    </form>
+                    
+                    <div class="text-center" style="margin-top: 25px;">
+                        <p style="font-size: 0.9rem;">Don't have an account? <a href="register.html" style="color: var(--color-primary); font-weight: 600;">Register here</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

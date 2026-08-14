@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - Stackly</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- Back to top button -->
+    <a href="#" id="backToTop" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+
+    <!-- Navbar Section -->
+    <header class="navbar-area">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img">
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Robotics Platform</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="mobile-sidebar-extra">
+                    <a href="login.html" class="btn w-100 btn-login" style="margin-bottom: 10px;">
+                        Login <i class="fa-regular fa-circle-user"></i>
+                    </a>
+                    <a href="register.html" class="btn btn-primary w-100" style="margin-bottom: 25px;">
+                        Register
+                    </a>
+                    
+                    <div class="sidebar-contact">
+                        <h5>CONTACT INFO</h5>
+                        
+                        <div class="contact-item">
+                            <span class="label">PHONE</span>
+                            <span class="value">+1-800-STACKLY-911</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">EMAIL</span>
+                            <span class="value">info@stackly.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">LOCATION</span>
+                            <span class="value">Stackly, Salem</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-right nav-auth-buttons" style="display: flex; gap: 15px; align-items: center;">
+                <a href="login.html" class="btn btn-outline" id="navLoginBtn" style="padding: 10px 20px; border: 2px solid var(--color-primary); color: var(--color-primary); border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">Login</a>
+                <a href="register.html" class="btn btn-primary" id="navRegisterBtn">Register</a>
+                <a href="dashboard.html" class="btn btn-primary" id="navDashboardBtn" style="display: none;">Dashboard</a>
+                <button class="btn btn-outline" id="navLogoutBtn" style="display: none; padding: 10px 20px; border: 2px solid #ef4444; color: #ef4444; border-radius: 8px; font-weight: 600; background: transparent; cursor: pointer;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Breadcrumb Header with Image Hero Section Layout -->
+    <section class="breadcrumb-header"
+        style="background-image: linear-gradient(rgba(10, 25, 47, 0.72), rgba(15, 32, 67, 0.78)), url('assets/server_rack.webp');">
+        <div class="container">
+            <h1>Flexible Platform Pricing</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <span>Pricing</span>
+            </div>
+            <p
+                style="margin-top:20px; font-size:1.15rem; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--text-light);">
+                Choose a Robotics-as-a-Service (RaaS) package scaled specifically to your connected fleet units.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Pricing Cards Section -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">PRICING TABLES</span>
+                    <h2>Choose Your Scale Option</h2>
+                </div>
+
+                <div class="projects-grid" style="grid-template-columns: repeat(3, 1fr);">
+
+                    <!-- Plan 1 -->
+                    <div class="service-card text-center" style="padding: 50px 30px;">
+                        <span class="badge">Standard</span>
+                        <h2 style="font-size:3rem; margin:20px 0; color:var(--color-primary);">$49<span
+                                style="font-size:1rem; font-weight:normal; color:var(--text-light);">/robot/mo</span>
+                        </h2>
+                        <p style="margin-bottom:30px; font-size:0.95rem;">Best for small fleets up to 10 autonomous
+                            mobile robots.</p>
+                        <ul class="why-list" style="text-align:left; margin-bottom:40px; gap:12px;">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Max 10 active robots</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Planar 2D LiDAR support</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Email support ticket queue</li>
+                        </ul>
+                        <a href="404.html" class="btn btn-secondary w-100">Get Started</a>
+                    </div>
+
+                    <!-- Plan 2 -->
+                    <div class="service-card text-center"
+                        style="padding: 50px 30px; border-color:var(--color-primary); box-shadow:var(--shadow-md);">
+                        <span class="badge" style="background-color:var(--color-primary); color:white;">Popular</span>
+                        <h2 style="font-size:3rem; margin:20px 0; color:var(--color-primary);">$89<span
+                                style="font-size:1rem; font-weight:normal; color:var(--text-light);">/robot/mo</span>
+                        </h2>
+                        <p style="margin-bottom:30px; font-size:0.95rem;">Optimal for medium warehouses operating up to
+                            50 robots.</p>
+                        <ul class="why-list" style="text-align:left; margin-bottom:40px; gap:12px;">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Max 50 active robots</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> 3D LiDAR & depth camera sync</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> 2-Hour SLA callback window</li>
+                        </ul>
+                        <a href="404.html" class="btn btn-primary w-100">Get Started</a>
+                    </div>
+
+                    <!-- Plan 3 -->
+                    <div class="service-card text-center" style="padding: 50px 30px;">
+                        <span class="badge">Enterprise</span>
+                        <h2 style="font-size:3rem; margin:20px 0; color:var(--color-primary);">Custom</h2>
+                        <p style="margin-bottom:30px; font-size:0.95rem;">For large-scale industrial spaces operating
+                            100+ robots.</p>
+                        <ul class="why-list" style="text-align:left; margin-bottom:40px; gap:12px;">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Unlimited active robots</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Local on-prem container deploy</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> 24/7 dedicated system manager</li>
+                        </ul>
+                        <a href="404.html" class="btn btn-secondary w-100">Contact Us</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Features SLA Details (10 Points Matrix) -->
+        <section class="section-padding" style="background-color: var(--bg-accent);">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">CAPABILITY MATRIX</span>
+                    <h2>Included in All Pricing Plans</h2>
+                </div>
+                <div class="projects-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Hardware-agnostic abstraction layer (HAL) for MiR, UR, Kuka units.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Zero-Trust communication payload validation layers.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Continuous firmware updates with simulated validation.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>REST API and JSON export integrations for SAP/Dynamics.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Autonomous charging docking dispatch algorithms.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Manual remote diagnostic override console tools.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Real-time local network broker failover protocols.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Dynamic speed limit adjustment zone maps.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Thermal engine and wheel encoder telemetry widgets.</span>
+                    </div>
+                    <div class="point-box">
+                        <i class="fa-solid fa-check" style="color:var(--color-primary);"></i>
+                        <span>Interactive coordinate route planning editor dashboards.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Pricing FAQs -->
+        <section class="section-padding">
+            <div class="container" style="max-width: 900px;">
+                <div class="section-header text-center">
+                    <span class="sub-title">PRICING ASSISTANCE</span>
+                    <h2>Pricing FAQs</h2>
+                </div>
+                <div class="projects-grid" style="grid-template-columns: 1fr; gap: 20px;">
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Are there setup fees?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">No setup fees. You only pay the per-robot-unit
+                            license fee when active.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Can we upgrade plans?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">Yes, you can upgrade from Standard to Enterprise
+                            billing at any time.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Do you offer a free trial?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">We offer a 14-day fully featured sandbox environment to test our API endpoints.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Are hardware costs included?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">No, our pricing only covers the Stackly cloud management software and middleware.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: What payment methods do you accept?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">We accept all major credit cards, bank transfers, and standard purchase orders.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Can we self-host the platform?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">Yes, local on-premise container deployment is available on our Enterprise plan.</p>
+                    </div>
+                    <div class="service-card" style="text-align: left; padding: 25px;">
+                        <h4>Q: Is there a discount for annual billing?</h4>
+                        <p style="font-size:0.95rem; margin-top:8px;">Yes, paying annually grants a 15% discount across all standard and popular plans.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-area">
+        <div class="container footer-widgets">
+            <div class="widget widget-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img" style="margin-bottom: 25px; height: 40px;">
+                    </a>
+                </div>
+                <p style="color: #a1a1aa;">Enterprise robotics cloud management software. Accelerating operations, safety audits, and automated dispatch operations.</p>
+                <div class="social-links">
+                    <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-github"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-discord"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h4>PLATFORM</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Fleet Management</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Pathfinding</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Hardware Abstraction</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Security & Auditing</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Platform Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>RESOURCES</h4>
+                <ul class="footer-links">
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Case Studies</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Integrations</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Robotics Blog</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Developer API</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> System Status</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>COMPANY</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Robotics Platform</a></li>
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Projects</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>LEGAL</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Safety Standards</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Compliance</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> GDPR</a></li>
+                </ul>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email" aria-label="Email">
+                    <button type="button" onclick="window.location.href='404.html'">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p class="copyright">&copy; 2026 Stackly Inc. All rights reserved.</p>
+                <div class="system-status">
+                    <span class="status-dot"></span> All systems operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script File -->
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

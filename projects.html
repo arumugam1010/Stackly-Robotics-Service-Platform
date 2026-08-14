@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies & Projects - Stackly</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- Back to top button -->
+    <a href="#" id="backToTop" class="back-to-top"><i class="fa-solid fa-angle-up"></i></a>
+
+    <!-- Navbar Section -->
+    <header class="navbar-area">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img">
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Robotics Platform</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="mobile-sidebar-extra">
+                    <a href="login.html" class="btn w-100 btn-login" style="margin-bottom: 10px;">
+                        Login <i class="fa-regular fa-circle-user"></i>
+                    </a>
+                    <a href="register.html" class="btn btn-primary w-100" style="margin-bottom: 25px;">
+                        Register
+                    </a>
+                    
+                    <div class="sidebar-contact">
+                        <h5>CONTACT INFO</h5>
+                        
+                        <div class="contact-item">
+                            <span class="label">PHONE</span>
+                            <span class="value">+1-800-STACKLY-911</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">EMAIL</span>
+                            <span class="value">info@stackly.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="label">LOCATION</span>
+                            <span class="value">Stackly, Salem</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-right nav-auth-buttons" style="display: flex; gap: 15px; align-items: center;">
+                <a href="login.html" class="btn btn-outline" id="navLoginBtn" style="padding: 10px 20px; border: 2px solid var(--color-primary); color: var(--color-primary); border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">Login</a>
+                <a href="register.html" class="btn btn-primary" id="navRegisterBtn">Register</a>
+                <a href="dashboard.html" class="btn btn-primary" id="navDashboardBtn" style="display: none;">Dashboard</a>
+                <button class="btn btn-outline" id="navLogoutBtn" style="display: none; padding: 10px 20px; border: 2px solid #ef4444; color: #ef4444; border-radius: 8px; font-weight: 600; background: transparent; cursor: pointer;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subpage Breadcrumb Header with Image Hero Section Layout -->
+    <section class="breadcrumb-header"
+        style="background-image: linear-gradient(rgba(10, 25, 47, 0.72), rgba(15, 32, 67, 0.78)), url('assets/projects_dashboard.webp');">
+        <div class="container">
+            <h1>Robotics Fleet Deployments</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <span>Case Studies</span>
+            </div>
+            <p
+                style="margin-top:20px; font-size:1.15rem; max-width: 700px; margin-left: auto; margin-right: auto; color: var(--text-light);">
+                Explore operational metrics from our 10 major logistics, cleanroom, and manufacturing plant setups.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Projects Section -->
+        <section class="projects-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">DEPLOYMENTS & RESULTS</span>
+                    <h2>10 Global Robotics Deployments</h2>
+                    <p style="max-width:700px; margin: 15px auto 0 auto;">Read how our cloud platform handles heavy
+                        warehouse tasks, coordinates assembly lines, and secures operations in real-world scenarios.</p>
+                </div>
+
+                <div class="projects-grid">
+
+                    <!-- Project 1 -->
+                    <div class="project-card reveal-up">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1581091226825-a6a2a5aee158-500.webp"
+                                alt="Melbourne Automated Sorting Facility"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Logistics Platform</span>
+                            <h3>1. Automated Sorting Facility, Melbourne</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Orchestrated 45
+                                sorting robots boosting order dispatch cycles by 38%.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1581092160607-ee22621dd758-500.webp"
+                                alt="Munich Coordinated Weld Arm Sync"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Assembly Lines</span>
+                            <h3>2. Coordinated Weld Arm Sync, Munich</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Synchronized
+                                12-axis precision weld arms for electric motor assemblies.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1504384308090-c894fdcc538d-500.webp"
+                                alt="Tokyo Multi-Level AGV Mapping"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Fleet Navigation</span>
+                            <h3>3. Multi-Level AGV Mapping, Tokyo</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Coordinated
+                                elevator transitions for mobile storage dispatch carts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card reveal-up">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1546776310-eef45dd6d63c-500.webp"
+                                alt="Austin High-Throughput Assembly Line"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Automotive Automation</span>
+                            <h3>4. High-Throughput Assembly Line, Austin</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Automated parts
+                                transit and chassis positioning tracking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1485827404703-89b55fcc595e-500.webp"
+                                alt="Seattle Autonomous Warehouse Pick-Pack"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">E-Commerce Fleet</span>
+                            <h3>5. Autonomous Warehouse Pick-Pack, Seattle</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Linked 120 mobile
+                                lifters to dynamic shipping queue databases.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1586528116311-ad8dd3c8310d-500.webp"
+                                alt="Berlin Precision Pallet Distribution"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Heavy Logistics</span>
+                            <h3>6. Precision Pallet Distribution, Berlin</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Automated heavy
+                                forklift paths around active cargo docks.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 -->
+                    <div class="project-card reveal-up">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1535378917042-10a22c95931a-500.webp"
+                                alt="Seoul Cleanroom Wafer Handling"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Semiconductor Cleanroom</span>
+                            <h3>7. Cleanroom Wafer Handling, Seoul</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Zero-particle
+                                autonomous transit loops inside a vacuum corridor.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 8 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1581091226033-d5c48150dbaa-500.webp"
+                                alt="Chicago Heavy-Payload Tugger Fleet"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Heavy Industry</span>
+                            <h3>8. Heavy-Payload Tugger Fleet, Chicago</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Orchestrated active
+                                route pathfinding for 3-ton material tuggers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 9 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1500382017468-9049fed747ef-500.webp"
+                                alt="California Orchard Harvesting Fleet"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Agriculture</span>
+                            <h3>9. Orchard Harvesting Fleet, California</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Outdoor GPS-based
+                                path planning and cargo box tracking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 10 -->
+                    <div class="project-card reveal-up">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1578575437130-527eed3abbec-500.webp"
+                                alt="Singapore Logistics Dock Cross-Docking"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Marine Logistics</span>
+                            <h3>10. Logistics Dock Cross-Docking, Singapore</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Automated shipping
+                                container loading queues and crane sync layers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 11 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.1s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/ai_robot_cobot.webp"
+                                alt="Sydney Cleanroom Packaging Line"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Food Production</span>
+                            <h3>11. Cleanroom Packaging Line, Sydney</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Sanitary robot arms
+                                executing high-speed product sorting and casing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 12 -->
+                    <div class="project-card reveal-up" style="animation-delay: 0.2s;">
+                        <div class="project-image" style="height: 200px; overflow: hidden;">
+                            <img src="assets/unsplash-1589254065878-42c9da997008-500.webp"
+                                alt="Shanghai Heavy Steel Plate Sorting"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="project-info">
+                            <span class="category">Metal Fabrication</span>
+                            <h3>12. Heavy Steel Plate Sorting, Shanghai</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">Autonomous magnetic
+                                gantries picking and sorting plate materials.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-area">
+        <div class="container footer-widgets">
+            <div class="widget widget-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/logo.webp" alt="Stackly Logo" class="logo-img" style="margin-bottom: 25px; height: 40px;">
+                    </a>
+                </div>
+                <p style="color: #a1a1aa;">Enterprise robotics cloud management software. Accelerating operations, safety audits, and automated dispatch operations.</p>
+                <div class="social-links">
+                    <a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-github"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-discord"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h4>PLATFORM</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Fleet Management</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Pathfinding</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Hardware Abstraction</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Security & Auditing</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Platform Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>RESOURCES</h4>
+                <ul class="footer-links">
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Case Studies</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Integrations</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Robotics Blog</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Developer API</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> System Status</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>COMPANY</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Robotics Platform</a></li>
+                    <li><a href="projects.html"><i class="fa-solid fa-chevron-right"></i> Projects</a></li>
+                    <li><a href="pricing.html"><i class="fa-solid fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h4>LEGAL</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Safety Standards</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Compliance</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chevron-right"></i> GDPR</a></li>
+                </ul>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email" aria-label="Email">
+                    <button type="button" onclick="window.location.href='404.html'">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p class="copyright">&copy; 2026 Stackly Inc. All rights reserved.</p>
+                <div class="system-status">
+                    <span class="status-dot"></span> All systems operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script File -->
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>
