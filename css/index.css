@@ -1252,6 +1252,7 @@ ul {
     font-size: 0.9rem;
     color: #8b949e;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
 .footer-links i {

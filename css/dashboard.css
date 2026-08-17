@@ -186,7 +186,7 @@ body {
     }
     
     .mobile-sidebar-toggle {
-        display: block;
+        display: flex;
     }
 
     .dashboard-sidebar {

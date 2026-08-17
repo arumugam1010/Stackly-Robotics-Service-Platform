@@ -48,6 +48,18 @@
                             0%, 100% { opacity: 0.4; r: 8; }
                             50% { opacity: 1; r: 12; }
                         }
+                        @keyframes hover-mobile {
+                            0% { transform: translateY(0); }
+                            50% { transform: translateY(-8px); }
+                            100% { transform: translateY(0); }
+                        }
+                        @media (max-width: 768px) {
+                            .robo-svg {
+                                width: 150px;
+                                height: 150px;
+                                animation: hover-mobile 4s ease-in-out infinite;
+                            }
+                        }
                     </style>
                     <!-- Antenna -->
                     <line x1="100" y1="40" x2="100" y2="10" stroke="#8b949e" stroke-width="4" stroke-linecap="round"/>
@@ -81,8 +93,8 @@
                     <circle cx="100" cy="165" r="8" fill="#fff"/>
                 </svg>
             </div>
-            <h1 style="font-size: 4rem; margin-bottom: 15px;"><span class="accent-text">404</span> - Connection Lost</h1>
-            <p style="font-size: 1.2rem; color: var(--text-light); max-width: 600px; margin: 0 auto 30px auto;">
+            <h1 class="error-title"><span class="accent-text">404</span> - Connection Lost</h1>
+            <p class="error-text">
                 The robotic unit you are searching for is currently unresponsive or has been reassigned. Please return to the command center.
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
@@ -143,6 +155,30 @@
             @keyframes slideGrid {
                 0% { background-position: 0 0; }
                 100% { background-position: 40px 40px; }
+            }
+            @keyframes float-mobile {
+                0% { transform: translate(0, 0) scale(1); }
+                33% { transform: translate(10px, -10px) scale(1.02); }
+                66% { transform: translate(-8px, 10px) scale(0.98); }
+                100% { transform: translate(0, 0) scale(1); }
+            }
+            .error-title {
+                font-size: 4rem;
+                margin-bottom: 15px;
+            }
+            .error-text {
+                font-size: 1.2rem;
+                color: var(--text-light);
+                max-width: 600px;
+                margin: 0 auto 30px auto;
+            }
+            @media (max-width: 768px) {
+                .orb-1 { width: 120px; height: 120px; animation-name: float-mobile; }
+                .orb-2 { width: 150px; height: 150px; animation-name: float-mobile; }
+                .orb-3 { width: 100px; height: 100px; animation-name: float-mobile; }
+                .grid-bg-animated { animation-duration: 30s; }
+                .error-title { font-size: 2.5rem; }
+                .error-text { font-size: 1rem; padding: 0 15px; }
             }
         </style>
         <div class="grid-bg grid-bg-animated" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.15; z-index: 1;"></div>
